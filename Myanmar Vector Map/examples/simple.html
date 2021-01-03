@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A jQuery plugin jqMyanmarVectorMap.js.">
+  <meta name="author" content="2KHA">
+  <title>jqMyanmarVectorMap</title>
+  
+   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+   <!-- jqMyanmarVectorMap CSS -->
+  <link rel="stylesheet" href="dist/css/jqmvm.css"> 
+  
+  <!-- Scripts -->
+   
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="  crossorigin="anonymous"></script>
+   <!-- Bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+   <!-- UnderScore JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.12.0/underscore-min.js" crossorigin="anonymous"></script>
+   <!-- jqMyanmarVectorMap -->
+  <script src="dist/jqmvm.js"></script>
+ 
+</head>
+<body>
+
+
+  <!-- Jumbotron -->
+  <div class="jumbotron bg-default text-black rounded-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md">
+          <h1>jQuery Myanmar Vector Map <small class="h6">v1.0.1</small></h1>
+          <p class="lead">A jQuery plugin for Myanmar Vector Map</p>
+        </div>        
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      
+	<div class="col-md-12" style="border-style: solid; border-color: #BDBDBD; border-width: thin;">
+		<div id="title" style="text-align:center; font-size:20px; font-weight:bold; display:block;">Myanmar Map</div>
+		<div id="map" style="height:700px; width:100%;">
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        var currentLevel = 0;
+		
+		//Please download SVG Map Files and put the url here. Please do not directly link to our github repository.
+		var svgUrl = "https://raw.githubusercontent.com/2kha/Visualizations/b6e9781e7dd5b08b53bf1f4f35271fb7cceaf93c/Myanmar%20Vector%20Map/src/svg/";
+		
+
+        var loadMap = function (level) {
+
+            var map1 = $("#map").jqMyanmarVectorMap({
+
+                        Culture: "en",
+                        SelectedColor: '#82FA58',
+                        HoveredColor: '#d4e6f1',
+                        DefaultColor: '#d2f5f3',
+                        Data: [],
+                        Level: level,
+                        MapPath: svgUrl,
+                        Drilldown: false,
+                        Zoom: 1,
+                        ShowTooltip: true,
+                        OnLoad: function (regions) {
+                        },
+                        OnClick: function (item) {
+                        },
+                        OnDoubleClick: function (item) {
+								
+							var l = parseInt(item.id);
+
+                            if (currentLevel == 0) {
+                                currentLevel = 1;                               
+                                loadMap(l);
+                            }
+                        },
+                        OnHover: function (item) {
+
+                        },
+                        OnBack: function (level) {
+
+                            currentLevel = 0;
+                            loadMap(level);
+                        }
+
+                    });
+
+        };
+
+        loadMap(currentLevel);
+
+    });
+
+
+</script>
+     
+
+ 
+</body>
+</html>
