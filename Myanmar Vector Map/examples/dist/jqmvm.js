@@ -1,4 +1,4 @@
-﻿
+
 /**
  * @summary     Myanmar Vector Map
  * @description Visualization for Myanmar Vector Map with States and Townships
