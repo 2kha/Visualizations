@@ -990,7 +990,7 @@
 
                     return false;
                 }
-            });;
+            });
 
             $(self).bind('touchmove', function (e) {
 
