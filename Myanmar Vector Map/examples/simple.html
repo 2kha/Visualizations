@@ -25,8 +25,8 @@
   <script src="dist/jqmvm.js"></script>
  
 </head>
-<body>
 
+<body>
 
   <!-- Jumbotron -->
   <div class="jumbotron bg-default text-black rounded-0">
@@ -42,73 +42,72 @@
 
   <!-- Content -->
   <div class="container">
-    <div class="row">
-      
-	<div class="col-md-12" style="border-style: solid; border-color: #BDBDBD; border-width: thin;">
-		<div id="title" style="text-align:center; font-size:20px; font-weight:bold; display:block;">Myanmar Map</div>
-		<div id="map" style="height:700px; width:100%;">
-    </div>
+		<div class="row">      
+			<div class="col-md-12" style="border-style: solid; border-color: #BDBDBD; border-width: thin;">
+				<div id="title" style="text-align:center; font-size:20px; font-weight:bold; display:block;">
+					Myanmar Map
+				</div>
+				<div id="map" style="height:700px; width:100%;">
+				</div>
+			</div>
+		</div>
+	</div>	
 
-</div>
+	<script>
 
-<script>
+		$(document).ready(function () {
 
-    $(document).ready(function () {
+			var currentLevel = 0;
+			
+			//Please download SVG Map Files and put the url here. Please do not directly link to our github repository.
+			var svgUrl = "https://raw.githubusercontent.com/2kha/Visualizations/b6e9781e7dd5b08b53bf1f4f35271fb7cceaf93c/Myanmar%20Vector%20Map/src/svg/";
+			
 
-        var currentLevel = 0;
-		
-		//Please download SVG Map Files and put the url here. Please do not directly link to our github repository.
-		var svgUrl = "https://raw.githubusercontent.com/2kha/Visualizations/b6e9781e7dd5b08b53bf1f4f35271fb7cceaf93c/Myanmar%20Vector%20Map/src/svg/";
-		
+			var loadMap = function (level) {
 
-        var loadMap = function (level) {
+				var map1 = $("#map").jqMyanmarVectorMap({
 
-            var map1 = $("#map").jqMyanmarVectorMap({
+					Culture: "en",
+					SelectedColor: '#82FA58',
+					HoveredColor: '#d4e6f1',
+					DefaultColor: '#d2f5f3',
+					Data: [],
+					Level: level,
+					MapPath: svgUrl,
+					Drilldown: false,
+					Zoom: 1,
+					ShowTooltip: true,
+					OnLoad: function (regions) {
+					},
+					OnClick: function (item) {
+					},
+					OnDoubleClick: function (item) {
+							
+						var l = parseInt(item.id);
 
-                        Culture: "en",
-                        SelectedColor: '#82FA58',
-                        HoveredColor: '#d4e6f1',
-                        DefaultColor: '#d2f5f3',
-                        Data: [],
-                        Level: level,
-                        MapPath: svgUrl,
-                        Drilldown: false,
-                        Zoom: 1,
-                        ShowTooltip: true,
-                        OnLoad: function (regions) {
-                        },
-                        OnClick: function (item) {
-                        },
-                        OnDoubleClick: function (item) {
-								
-							var l = parseInt(item.id);
+						if (currentLevel == 0) {
+							currentLevel = 1;                               
+							loadMap(l);
+						}
+					},
+					OnHover: function (item) {
 
-                            if (currentLevel == 0) {
-                                currentLevel = 1;                               
-                                loadMap(l);
-                            }
-                        },
-                        OnHover: function (item) {
+					},
+					OnBack: function (level) {
 
-                        },
-                        OnBack: function (level) {
+						currentLevel = 0;
+						loadMap(level);
+					}
 
-                            currentLevel = 0;
-                            loadMap(level);
-                        }
+				});
 
-                    });
+			};
 
-        };
+			loadMap(currentLevel);
 
-        loadMap(currentLevel);
+		});
 
-    });
-
-
-</script>
-     
-
+	</script>
  
 </body>
 </html>
