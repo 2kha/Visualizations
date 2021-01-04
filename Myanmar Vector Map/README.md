@@ -91,7 +91,7 @@ Generally, data must be an array for townships or states, with Color and Item in
 	]
 ```
 
-### Ajax
+### AJAX
 
 It is possible to feed data from Server-Side with Ajax
 
@@ -101,7 +101,7 @@ It is possible to feed data from Server-Side with Ajax
         var loadMap = function (level) {
 
             $.ajax({
-                url: "https://example.com/mapdata/",
+                url: "https://example.com/map/",
                 data: { level: level },
                 type: "POST",
                 success: function (response) {
@@ -120,6 +120,7 @@ It is possible to feed data from Server-Side with Ajax
                         Drilldown: false,
                         Zoom: 1,
                         ShowTooltip: true,
+			
                         OnLoad: function (regions) {
                         },
                         OnClick: function (item) {
