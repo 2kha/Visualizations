@@ -76,17 +76,17 @@ Generally, data must be an array for townships or states, with Color and Item in
 ```sh
 	data = [
 		{
-			Color : #A3B2F2
-			Item  : { "Name" : "M", "Temperature" : 23  }
+			"Color" : "#A3B2F2"
+			"Item"  : { "Name" : "M", "Temperature" : 23  }
 		},
 		{
-			Color : #A1B2F2
-			Item  : { "Name" : "B", "Temperature" : 23  }
+			"Color" : "#A1B2F2"
+			"Item"  : { "Name" : "B", "Temperature" : 23  }
 		},
 		...
 		{
-			Color : #A1B2F2
-			Item  : { "Name" : "C", "Temperature" : 34  }
+			"Color" : "#A1B2F2"
+			"Item"  : { "Name" : "C", "Temperature" : 34  }
 		},
 	]
 ```
