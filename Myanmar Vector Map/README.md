@@ -63,7 +63,7 @@ jqMVM can be easily configured by providing configruation options.
       }
 ```
 
-### Levels
+### Level
 
 There are two levels in jqMVM: States Level and Township Level.
 
