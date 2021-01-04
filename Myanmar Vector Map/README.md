@@ -11,7 +11,7 @@ In order to be fully functional, jqMVM will require:
   https://code.jquery.com/
   ```
   
- * Underscore JS
+* Underscore JS
   ```sh
   https://underscorejs.org/
   ```
