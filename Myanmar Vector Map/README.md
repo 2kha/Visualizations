@@ -87,7 +87,7 @@ Generally, data must be an array for townships or states, with Color and Item in
 			"Color" : "#A1B2F2"
 			"Item"  : { "Name" : "C", "Temperature" : 34  }
 		},
-	]
+	       ]
 ```
 
 ### AJAX
