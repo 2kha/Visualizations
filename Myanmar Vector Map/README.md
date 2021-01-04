@@ -107,7 +107,7 @@ It is possible to feed data from Server-Side with Ajax
 
                     var data = JSON.parse(response.json);
 
-                    var map = $("#map").mmVectorMap({
+                    var map = $("#map").jqMyanmarVectorMap({
 
                         Culture: "mm",
                         SelectedColor: '#82FA58',
