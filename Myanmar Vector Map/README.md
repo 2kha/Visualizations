@@ -23,7 +23,7 @@ In addition, it is necessay provide a link to SVG Map Files
 
 * SVG Link
   ```sh
- example: https://example.com/svg/
+  example: https://example.com/svg/
   ```
   
 
