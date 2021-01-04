@@ -32,6 +32,7 @@ In addition, it is necessay to host SVG Map files, and provide a link to SVG Map
 
 jqMVM can be easily configured by providing configruation options.
 
+
 ### Options
 
 ```sh
@@ -65,6 +66,12 @@ jqMVM can be easily configured by providing configruation options.
 ### Levels
 
 There are two levels in jqMVM: States Level and Township Level.
+
+
+### Culture
+
+There are two Langauge Cultures: "en" English and "mm" Burmese in jqMVM. 
+
 
 ### Data
 
