@@ -30,7 +30,7 @@ In addition, it is necessay to host SVG Map files, and provide a link to SVG Map
   
 ## Getting Started
 
-First of all, it is necessary to provide options for jqMVM.
+jqMVM can be easily configured by providing configruation options.
 
 ### Options
 
@@ -71,15 +71,87 @@ There are two levels in jqMVM: States Level and Township Level.
 
 Data can be provided to display visualization. For example, temperature by states, or population by townships.
 
+Generally, data must be an array for townships or states, with Color and Item information.
+
 ```sh
 	data = [
 		{
 			Color : #A3B2F2
-			Item  : 32
+			Item  : { "Name" : "M", "Temperature" : 23  }
 		},
 		{
-			Color : #A3B2F2
-			Item  : 32
+			Color : #A1B2F2
+			Item  : { "Name" : "B", "Temperature" : 23  }
+		},
+		...
+		{
+			Color : #A1B2F2
+			Item  : { "Name" : "C", "Temperature" : 34  }
 		},
 	]
 ```
+
+### Ajax
+
+It is possible to feed data from Server-Side with Ajax
+
+```sh
+	var currentLevel = 0;
+
+        var loadMap = function (level) {
+
+            $.ajax({
+                url: "https://example.com/mapdata/",
+                data: { level: level },
+                type: "POST",
+                success: function (response) {
+
+                    var data = JSON.parse(response.json);
+
+                    var map = $("#map").mmVectorMap({
+
+                        Culture: "mm",
+                        SelectedColor: '#82FA58',
+                        HoveredColor: '#d4e6f1',
+                        DefaultColor: '#d2f5f3',
+                        Data: data,
+                        Level: level,
+                        MapPath: '/scripts/Library/svg/',
+                        Drilldown: false,
+                        Zoom: 1,
+                        ShowTooltip: true,
+                        OnLoad: function (regions) {
+                        },
+                        OnClick: function (item) {
+                        },
+                        OnDoubleClick: function (item) {
+
+                            var l = parseInt(item.id);
+
+                            if (currentLevel == 0) {
+                                currentLevel = 1;                                
+                                loadMap(l);
+                            }
+
+                        },
+                        OnHover: function (item) {
+
+                        },
+                        OnBack: function (level) {
+
+                            currentLevel = 0;
+                            loadMap(level);
+                        }
+
+                    });
+                },
+                error: function () {
+
+                }
+            });
+
+        };
+
+        loadMap(currentLevel);
+```
+
