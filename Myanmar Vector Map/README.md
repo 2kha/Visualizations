@@ -11,17 +11,16 @@ In order to be fully functional, jqMVM will require:
   https://code.jquery.com/
   ```
   
-  * Underscore JS
+ * Underscore JS
   ```sh
   https://underscorejs.org/
   ```
-  
-  
   
 
 ### SVG
 
 In addition, it is necessay provide a link to SVG Map Files
+
 * SVG Link
   ```sh
  example: https://example.com/svg/
