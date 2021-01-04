@@ -53,8 +53,7 @@ First of all, it is necessary to provide options for jqMVM.
 	},
 	OnClick: function (item) {
 	},
-	OnDoubleClick: function (item) {		
-		
+	OnDoubleClick: function (item) {
 	},
 	OnHover: function (item){
 	},
@@ -62,4 +61,25 @@ First of all, it is necessary to provide options for jqMVM.
 	}
 
       });
+```
+
+### Levels
+
+There are two levels in jqMVM: States Level and Township Level.
+
+### Data
+
+Data can be provided to display visualization. For example, temperature by states, or population by townships.
+
+```sh
+	data = [
+		{
+			Color : #A3B2F2
+			Item  : 32
+		},
+		{
+			Color : #A3B2F2
+			Item  : 32
+		},
+	]
 ```
