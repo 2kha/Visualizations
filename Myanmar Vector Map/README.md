@@ -59,8 +59,7 @@ jqMVM can be easily configured by providing configruation options.
 	},
 	OnBack: function (level){		
 	}
-
-      });
+      }
 ```
 
 ### Levels
