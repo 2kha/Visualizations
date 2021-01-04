@@ -30,41 +30,36 @@ In addition, it is necessay to host SVG Map files, and provide a link to SVG Map
   
 ## Getting Started
 
+First of all, it is necessary to provide options for jqMVM.
+
 ### Options
 
 ```sh
-       {
-          Culture: "en",
-					SelectedColor: '#82FA58',
-					HoveredColor: '#d4e6f1',
-					DefaultColor: '#d2f5f3',
-					Data: [],
-					Level: level,
-					MapPath: svgUrl,
-					Drilldown: false,
-					Zoom: 1,
-					ShowTooltip: true,
-					OnLoad: function (regions) {
-					},
-					OnClick: function (item) {
-					},
-					OnDoubleClick: function (item) {
-							
-						var l = parseInt(item.id);
+      {
+        //Options
+        Culture: "en",   
+	SelectedColor: '#82FA58',
+	HoveredColor: '#d4e6f1',
+	DefaultColor: '#d2f5f3',
+	Data: [],
+	Level: level,
+	MapPath: svgUrl,
+	Drilldown: false,
+	Zoom: 1,
+	ShowTooltip: true,
+	
+	//Events
+	OnLoad: function (regions) {
+	},
+	OnClick: function (item) {
+	},
+	OnDoubleClick: function (item) {		
+		
+	},
+	OnHover: function (item){
+	},
+	OnBack: function (level){		
+	}
 
-						if (currentLevel == 0) {
-							currentLevel = 1;                               
-							loadMap(l);
-						}
-					},
-					OnHover: function (item) {
-
-					},
-					OnBack: function (level) {
-
-						currentLevel = 0;
-						loadMap(level);
-					}
-
-				});
+      });
 ```
