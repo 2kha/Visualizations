@@ -1,6 +1,6 @@
 # jQuery Myanmar Vector Map
 
-jQuery Plugins for Myanmar Vector Map (jqMVM), which includes all the states and townships, available in both English and Burmese.
+A jQuery Plugin for Myanmar Vector Map (jqMVM), which includes all the states and townships, available in both English and Burmese.
 
 
 ## Prerequisites
