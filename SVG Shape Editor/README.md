@@ -11,7 +11,7 @@ A jQuery Plugin for SVG Shape, which could be useful for various purpose.
 
 ### Javascript Libraries
 
-In order to be fully functional, jqMVM will require:
+In order to be fully functional, jqLabelEditor will require:
 
 * jQuery
   ```sh
