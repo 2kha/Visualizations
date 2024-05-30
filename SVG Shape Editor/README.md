@@ -2,7 +2,9 @@
 
 A jQuery Plugin for SVG Shape, which could be useful for various purpose.
 
-<img src="https://raw.githubusercontent.com/2kha/Visualizations/main/Myanmar%20Vector%20Map/images/myanmarmap.jpg" />
+<a href="" target="_blank">Live Demohttps://2kha.github.io/polygon.html</a>
+
+<img src="https://github.com/2kha/Visualizations/blob/main/SVG%20Shape%20Editor/images/sample.jpg" />
 
 
 ## Prerequisites
