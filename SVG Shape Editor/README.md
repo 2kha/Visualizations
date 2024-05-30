@@ -34,7 +34,7 @@ In order to be fully functional, jqMVM will require:
 jqLabelEditor can be easily docked to any div container.
 
 
-### Options
+### jQuery
 
 ```sh
        var editor = $("#region").jqLabelEditor({});
