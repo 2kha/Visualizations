@@ -2,6 +2,8 @@
 
 A jQuery Plugin for Myanmar Vector Map (jqMVM), which includes all the states and townships, available in both English and Burmese.
 
+<a href="https://2kha.github.io/map.html">Live Demo</a> 
+
 <img src="https://raw.githubusercontent.com/2kha/Visualizations/main/Myanmar%20Vector%20Map/images/myanmarmap.jpg" />
 
 
