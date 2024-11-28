@@ -58,7 +58,7 @@
 
         var applyTransform = function (element, transX, transY, cx = 0, cy = 0, angle = 0) {
 
-            $(element).attr('transform', 'translate(' + transX + ', ' + transY + ') rotate(' + angle + ',' + cx + ',' + cy + ')');
+            $(element).attr('transform', 'translate(' + transX + ',' + transY + ') rotate(' + angle + ',' + cx + ',' + cy + ')');
         };
 
         var addGroup = function(parent, x, y) {
