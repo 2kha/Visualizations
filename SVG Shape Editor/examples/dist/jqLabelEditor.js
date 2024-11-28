@@ -1,7 +1,7 @@
 
 /**
  * @summary     Label Editor
- * @description Visualization for Shapes
+ * @description Visualization for Polygons
  * @version     1.0.3
  * @file        jqLabelEditor
  * @author      2KHA 
@@ -42,7 +42,15 @@
             dy: 0
         };
 
-        
+		var applyRotation = function (x = 0, y = 0, beta = 0, dx = 0, dy = 0) {
+
+			var angle = beta * Math.PI / 180;
+
+			var tx = parseFloat((x * Math.cos(angle)) - (y * Math.sin(angle)));
+			var ty = parseFloat((x * Math.sin(angle)) + (y * Math.cos(angle)));
+
+			return [tx, ty];
+		}
 
         var applyZoom = function (element, scale) {
             $(element).attr('transform', 'scale(' + scale + ')');
@@ -174,11 +182,11 @@
 
                 last.classed("stop", false);
 
-                var fx = parseInt(first.attr("cx"));
-                var fy = parseInt(first.attr("cy"));
+                var fx = parseFloat(first.attr("cx"));
+                var fy = parseFloat(first.attr("cy"));
 
-                var lx = parseInt(last.attr("cx"));
-                var ly = parseInt(last.attr("cy"));
+                var lx = parseFloat(last.attr("cx"));
+                var ly = parseFloat(last.attr("cy"));
 
                 var dx = Math.abs(fx - x);
                 var dy = Math.abs(fy - y);
@@ -229,10 +237,10 @@
              var lines = group.selectAll(".link").each(function (d, j) {
                 var line = d3.select(this);
 
-                var fx = parseInt(line.attr("x1"));
-                var fy = parseInt(line.attr("y1"));
-                var lx = parseInt(line.attr("x2"));
-                var ly = parseInt(line.attr("y2"));
+                var fx = parseFloat(line.attr("x1"));
+                var fy = parseFloat(line.attr("y1"));
+                var lx = parseFloat(line.attr("x2"));
+                var ly = parseFloat(line.attr("y2"));
 
                 var dfx = Math.abs(fx - x);
                 var dfy = Math.abs(fy - y);
@@ -255,8 +263,8 @@
 
         var adjustPolygonGroup = function(group, corner, links, dx, dy) {
 
-            var cx = parseInt(corner.attr("cx"));
-            var cy = parseInt(corner.attr("cy"));
+            var cx = parseFloat(corner.attr("cx"));
+            var cy = parseFloat(corner.attr("cy"));
 
             var x = cx - dx;
             var y = cy - dy;
@@ -313,8 +321,8 @@
 
            var box = group.select(".box");
 
-           left = left != 0 ? left : parseInt(box.attr("x"));
-           top = top != 0 ? top : parseInt(box.attr("y"));
+           left = left != 0 ? left : parseFloat(box.attr("x"));
+           top = top != 0 ? top : parseFloat(box.attr("y"));
 
            adjustRectangle(box, left, top, width, height);
 
@@ -548,28 +556,30 @@
 
                                         applyBoxSelection(d3.select(group));
 
-                                        var w = parseInt(d3.select(group).select(".box").attr("width"));
-                                        var h = parseInt(d3.select(group).select(".box").attr("height"));
+                                        var w = parseFloat(d3.select(group).select(".box").attr("width"));
+										var h = parseFloat(d3.select(group).select(".box").attr("height"));
 
-                                        self.width = w || width;
-                                        self.height = h || height;
+										self.x = x;
+										self.y = y;                                     
 
-                                        self.x = x;
-                                        self.y = y;
+										if (d3.select(group).node().transform.baseVal.length > 0)
+										{
+											self.transX = d3.select(group).node().transform.baseVal.getItem(0).matrix.e;
+											self.transY = d3.select(group).node().transform.baseVal.getItem(0).matrix.f;
+										}
 
-                                        self.cx = self.x + self.width * 0.5;
-                                        self.cy = self.y + self.height * 0.5;
+										var rotations = map.getRotation(d3.select(group).node());
 
-                                        if (d3.select(group).node().transform.baseVal.length > 0)
-                                        {
-                                            self.transX = d3.select(group).node().transform.baseVal.getItem(0).matrix.e;
-                                            self.transY = d3.select(group).node().transform.baseVal.getItem(0).matrix.f;
-                                        }
+										if (d3.select(group).node().transform.baseVal.length > 1)
+										{
+											self.alpha = d3.select(group).node().transform.baseVal.getItem(1).angle;
+										}
 
-                                        if (d3.select(group).node().transform.baseVal.length > 1)
-                                        {
-                                            self.alpha = d3.select(group).node().transform.baseVal.getItem(1).angle;
-                                        }
+										self.width = w || width;
+										self.height = h || height;
+
+										self.cx = rotations[1] || self.x + self.width * 0.5;
+										self.cy = rotations[2] || self.y + self.height * 0.5;
 
                                         return false;
 
@@ -698,11 +708,11 @@
 
                             d3.select("svg").style("cursor","move");
 
-                            self.x = parseInt(parent.select(".box").attr("x"));
-                            self.y = parseInt(parent.select(".box").attr("y"));
+                            self.x = parseFloat(parent.select(".box").attr("x"));
+                            self.y = parseFloat(parent.select(".box").attr("y"));
 
-                            self.width = parseInt(parent.select(".box").attr("width"));
-                            self.height = parseInt(parent.select(".box").attr("height"));
+                            self.width = parseFloat(parent.select(".box").attr("width"));
+                            self.height = parseFloat(parent.select(".box").attr("height"));
 
                             self.cx = self.x + self.width * 0.5;
                             self.cy = self.y + self.height * 0.5;
@@ -735,11 +745,17 @@
 
                             var parent = d3.select(".selected");
 
-                            self.x = parseInt(parent.select(".box").attr("x"));
-                            self.y = parseInt(parent.select(".box").attr("y"));
+                            self.x = parseFloat(parent.select(".box").attr("x"));
+                            self.y = parseFloat(parent.select(".box").attr("y"));
 
-                            var dx = (resizeX - e.pageX);
-                            var dy = (resizeY - e.pageY);
+                            var rotations = [];
+
+							var angle = -1 * self.alpha;
+
+							rotations = applyRotation((resizeX - e.pageX), (resizeY - e.pageY), angle);
+
+							var dx = rotations[0];
+							var dy = rotations[1];
 
                             if (direction == 0) {
 
@@ -933,8 +949,8 @@
 
                                     self.handle = d3.select(this);
 
-                                    var cx = parseInt(self.handle.attr("cx"));
-                                    var cy = parseInt(self.handle.attr("cy"));                                  
+                                    var cx = parseFloat(self.handle.attr("cx"));
+                                    var cy = parseFloat(self.handle.attr("cy"));                                  
 
                                     var parent = d3.select(self.handle.node().parentNode);
 
@@ -1041,6 +1057,84 @@
         }
 
         initMap();
+		
+		map.getTranslation = function (element) {
+
+			var parts = map.getTransformations(element);
+
+			if (parts != null) {
+				var translate = parts[0];
+
+				var translation = translate.replace("translate(", "[")
+				  .replace(")", "]");
+
+				return JSON.parse(translation);
+			}
+			else {
+				return [0, 0];
+			}
+		}
+
+		  map.addTranslation = function (element, x, y) {
+
+		  var tx = map.getTranslation(element);
+
+		  var rotation = map.getTransformations(element)[1];
+
+		  d3.select(element).attr("transform", 'translate(' + parseFloat(x + tx[0]) + ',' + parseFloat(y + tx[1]) + ') ' + rotation);
+		}
+
+		map.setTranslation = function (element, x, y) {
+
+		  var rotation = map.getTransformations(element)[1];
+
+		  d3.select(element).attr("transform", 'translate(' + parseFloat(x) + ',' + parseFloat(y) + ') ' + rotation);
+		}
+
+		map.addRotation = function (element, angle) {
+
+		  var rx = map.getRotation(element);
+
+		  var translation = map.getTransformations(element)[0];
+
+		  d3.select(element).attr("transform", translation + ' rotate(' + parseFloat(angle + rx[0]) + ',' + rx[1] + "," + rx[2] + ")");
+		}
+
+		map.setRotation = function (element, angle) {
+
+		  var rx = map.getRotation(element);
+
+		  var translation = map.getTransformations(element)[0];
+
+		  d3.select(element).attr("transform", translation + ' rotate(' + parseFloat(angle) + ',' + rx[1] + "," + rx[2] + ")");
+		}
+
+		map.getTransformations = function (element) {
+
+		  var transform = d3.select(element).attr("transform");
+
+		  var parts = transform.split(" ");
+
+		  return parts;
+		}
+
+		map.getRotation = function (element) {
+
+		  var parts = map.getTransformations(element);
+
+		  if (parts != null) {
+			  var rotate = parts[1];
+
+			  var rotation = rotate.replace("rotate(", "[")
+				  .replace(")", "]");
+
+			  return JSON.parse(rotation);
+		  }
+		  else {
+			  return [0, 0, 0];
+		  }
+
+		}
 
 
         return map;
