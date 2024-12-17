@@ -42,15 +42,15 @@
             dy: 0
         };
 
-		var applyRotation = function (x = 0, y = 0, beta = 0, dx = 0, dy = 0) {
+	var applyRotation = function (x = 0, y = 0, beta = 0, dx = 0, dy = 0) {
 
-			var angle = beta * Math.PI / 180;
+		var angle = beta * Math.PI / 180;
 
-			var tx = parseFloat((x * Math.cos(angle)) - (y * Math.sin(angle)));
-			var ty = parseFloat((x * Math.sin(angle)) + (y * Math.cos(angle)));
+		var tx = parseFloat((x * Math.cos(angle)) - (y * Math.sin(angle)));
+		var ty = parseFloat((x * Math.sin(angle)) + (y * Math.cos(angle)));
 
-			return [tx, ty];
-		}
+		return [tx, ty];
+	}
 
         var applyZoom = function (element, scale) {
             $(element).attr('transform', 'scale(' + scale + ')');
@@ -557,29 +557,29 @@
                                         applyBoxSelection(d3.select(group));
 
                                         var w = parseFloat(d3.select(group).select(".box").attr("width"));
-										var h = parseFloat(d3.select(group).select(".box").attr("height"));
+					var h = parseFloat(d3.select(group).select(".box").attr("height"));
 
-										self.x = x;
-										self.y = y;                                     
+					self.x = x;
+					self.y = y;                                     
 
-										if (d3.select(group).node().transform.baseVal.length > 0)
-										{
-											self.transX = d3.select(group).node().transform.baseVal.getItem(0).matrix.e;
-											self.transY = d3.select(group).node().transform.baseVal.getItem(0).matrix.f;
-										}
+					if (d3.select(group).node().transform.baseVal.length > 0)
+					{
+						self.transX = d3.select(group).node().transform.baseVal.getItem(0).matrix.e;
+						self.transY = d3.select(group).node().transform.baseVal.getItem(0).matrix.f;
+					}
 
-										var rotations = map.getRotation(d3.select(group).node());
+					var rotations = map.getRotation(d3.select(group).node());
 
-										if (d3.select(group).node().transform.baseVal.length > 1)
-										{
-											self.alpha = d3.select(group).node().transform.baseVal.getItem(1).angle;
-										}
+					if (d3.select(group).node().transform.baseVal.length > 1)
+					{
+						self.alpha = d3.select(group).node().transform.baseVal.getItem(1).angle;
+					}
 
-										self.width = w || width;
-										self.height = h || height;
+					self.width = w || width;
+					self.height = h || height;
 
-										self.cx = rotations[1] || self.x + self.width * 0.5;
-										self.cy = rotations[2] || self.y + self.height * 0.5;
+					self.cx = rotations[1] || self.x + self.width * 0.5;
+					self.cy = rotations[2] || self.y + self.height * 0.5;
 
                                         return false;
 
@@ -750,12 +750,12 @@
 
                             var rotations = [];
 
-							var angle = -1 * self.alpha;
+			    var angle = -1 * self.alpha;
 
-							rotations = applyRotation((resizeX - e.pageX), (resizeY - e.pageY), angle);
+			    rotations = applyRotation((resizeX - e.pageX), (resizeY - e.pageY), angle);
 
-							var dx = rotations[0];
-							var dy = rotations[1];
+			    var dx = rotations[0];
+			    var dy = rotations[1];
 
                             if (direction == 0) {
 
