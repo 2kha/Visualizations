@@ -6,7 +6,7 @@
  * @file        jqmvm
  * @author      2KHA 
  * @contact     tlaung@gmail.com
- * @copyright   Copyright (C) 2018-2025 MANGO AI
+ * @copyright   Copyright (C) MANGO AI
  *
  * This source file is free software, available under the following license:
  *    GNU GENERAL PUBLIC LICENSE license - https://github.com/2kha/Visualizations/blob/main/LICENSE
@@ -1391,6 +1391,7 @@
     };
 
 }(jQuery));
+
 
 
 
