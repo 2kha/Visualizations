@@ -5,8 +5,8 @@
  * @version     1.0.3
  * @file        jqmvm
  * @author      2KHA 
- * @contact     tl.aung@2kha.com
- * @copyright   Copyright (C) 2018-2021 Bambou Tree Myanmar Ltd.
+ * @contact     tlaung@gmail.com
+ * @copyright   Copyright (C) 2018-2025 MANGO AI
  *
  * This source file is free software, available under the following license:
  *    GNU GENERAL PUBLIC LICENSE license - https://github.com/2kha/Visualizations/blob/main/LICENSE
@@ -1391,5 +1391,6 @@
     };
 
 }(jQuery));
+
 
 
