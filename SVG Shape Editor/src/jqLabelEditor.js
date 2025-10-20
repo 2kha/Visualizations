@@ -6,7 +6,7 @@
  * @file        jqLabelEditor
  * @author      2KHA 
  * @contact     tla.atc.co.nl@gmail.com
- * @copyright   Copyright (C) Mango AI.
+ * @copyright   Copyright (C) Mango AI
  *
  * This source file is free software, available under the following license:
  *    GNU GENERAL PUBLIC LICENSE license - https://github.com/2kha/Visualizations/blob/main/LICENSE
